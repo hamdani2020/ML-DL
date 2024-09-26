@@ -39,7 +39,7 @@ st.set_page_config(
 HERE = Path(__file__).parent
 ROOT = HERE.parent
 MODEL_URL = "https://github.com/hamdani2020/balloon/raw/main/balloon.pt"
-MODEL_LOCAL_PATH = ROOT / "models" / "YOLOv8_Seg.pt"
+MODEL_LOCAL_PATH = ROOT / "models" / "balloon.pt"
 
 # Ensure the models directory exists
 os.makedirs(ROOT / "models", exist_ok=True)
@@ -49,7 +49,7 @@ def download_file_with_logging(url, local_path, expected_size):
     download_file(url, local_path, expected_size)
     logger.info(f"Download complete. File saved to {local_path}")
 
-@st.cache_data(persist="disk")
+@st.cache_resource()
 def load_model():
     logger.info("Entering load_model function")
     if not MODEL_LOCAL_PATH.exists():
