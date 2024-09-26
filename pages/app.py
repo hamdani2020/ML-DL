@@ -39,7 +39,7 @@ st.set_page_config(
 HERE = Path(__file__).parent
 ROOT = HERE.parent
 MODEL_URL = "https://github.com/hamdani2020/balloon/raw/main/balloon.pt"
-MODEL_LOCAL_PATH = ROOT / "./models/YOLOv8_Seg.pt"
+MODEL_LOCAL_PATH = ROOT / "models" / "YOLOv8_Seg.pt"
 
 # Ensure the models directory exists
 os.makedirs(ROOT / "models", exist_ok=True)
