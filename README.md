@@ -84,9 +84,10 @@ Open your web browser and go to `http://localhost:8501` to use the app. You can:
 balloon-detection-app/
 │
 ├── images/                 # Directory for storing images  
-├── pages/                  # Directory for storing pages for streamlit
-├── app.py                  # Main application file
 ├── models/                 # Directory for storing YOLO model weights
+├── pages/                  # Directory for storing pages for streamlit
+├── sample_utils/           # Directory for download utils
+├── app.py                  # Main application file
 ├── requirements.txt        # File containing Python dependencies
 └── README.md               # Project documentation
 ```
