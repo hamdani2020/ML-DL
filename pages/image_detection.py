@@ -36,20 +36,23 @@ st.set_page_config(
 
 # https://github.com/hamdani2020/balloon/blob/main/balloon.pt
 
+# Paths
 HERE = Path(__file__).parent
 ROOT = HERE.parent
 MODEL_URL = "https://github.com/hamdani2020/balloon/raw/main/balloon.pt"
-MODEL_LOCAL_PATH = ROOT / "./models/YOLOv8_Seg.pt"
+MODEL_LOCAL_PATH = ROOT / "models" / "balloon.pt"
 
 # Ensure the models directory exists
 os.makedirs(ROOT / "models", exist_ok=True)
 
+# Download file with logging
 def download_file_with_logging(url, local_path, expected_size):
     logger.info(f"Downloading file from {url} to {local_path}")
     download_file(url, local_path, expected_size)
     logger.info(f"Download complete. File saved to {local_path}")
 
-@st.cache_data(persist="disk")
+# Load model with caching
+@st.cache_resource()
 def load_model():
     logger.info("Entering load_model function")
     if not MODEL_LOCAL_PATH.exists():
@@ -82,6 +85,7 @@ st.markdown(subtitle)
 uploaded_files = st.file_uploader("Upload Images", type=["png", "jpg", "jpeg", "webp"], accept_multiple_files=True)
 score_threshold = st.slider("Confidence Threshold", min_value=0.0, max_value=1.0, value=0.1, step=0.05)
 
+# Extract GPS info from image
 def extract_gps_info(image):
     try:
         exif_dict = piexif.load(image.info["exif"])
@@ -102,6 +106,7 @@ def extract_gps_info(image):
     
     return None, None
 
+# Process image and detect balloons
 def process_image(image_file):
     logger.info(f"Processing image: {image_file.name}")
     image = Image.open(image_file)
@@ -121,6 +126,7 @@ def process_image(image_file):
     
     return _image, image_pred, lat, lon
 
+# Create map with detected balloons
 def create_map(coordinates):
     m = folium.Map(location=[0, 0], zoom_start=2)
     for lat, lon in coordinates:
@@ -128,6 +134,7 @@ def create_map(coordinates):
             folium.Marker([lat, lon], popup="Balloon detected").add_to(m)
     return m
 
+# Process images and display results
 if uploaded_files:
     all_coordinates = []
     for image_file in uploaded_files:
