@@ -1,27 +1,29 @@
 # Balloon Detection App 🎈
 
 ## Project Description
-The **Balloon Detection App** is designed to detect and locate balloons in images using advanced computer vision techniques. Built with **Streamlit**, this app employs the YOLO (You Only Look Once) object detection model to provide accurate and real-time balloon detection. Additionally, it extracts GPS metadata from the uploaded images (if available) and displays the balloon locations on an interactive map.
+The **Balloon Detection App** is a machine learning application designed to detect and locate balloons in images and video streams using advanced computer vision techniques. Built with **Streamlit**, the app utilizes the YOLO (You Only Look Once) object detection model to provide real-time and high-accuracy balloon detection. Additionally, it extracts GPS metadata from uploaded images (if available) and displays the balloon locations on an interactive map.
 
-This project demonstrates the power of computer vision for object detection in a user-friendly, web-based interface.
+This project demonstrates how computer vision can be integrated into a user-friendly web-based interface, with support for both static images and video streams.
 
 ## Features
-- **Real-time Balloon Detection**: Upload images, and the app will detect and highlight balloons.
-- **GPS Metadata Extraction**: If an image contains GPS data, the app will extract and display the latitude and longitude.
-- **Interactive Map**: Detected balloon locations are shown on a **Folium** map within the app.
-- **Downloadable Results**: Processed images with detections can be downloaded.
+- **Real-time Balloon Detection**: Detect balloons in real-time from your webcam or other video streams.
+- **Video Detection**: Upload video files for balloon detection.
+- **Image Detection**: Upload images for detection, and the app will highlight balloons.
+- **GPS Metadata Extraction**: If an image contains GPS data, the app extracts and displays latitude and longitude.
+- **Interactive Map**: Detected balloon locations are visualized on a **Folium** map.
+- **Downloadable Results**: Download processed images or video frames with detected balloons.
 
 ## How to Install
 
 ### Step 1: Clone the Repository
 First, clone the project repository from GitHub:
 ```bash
-git clone git clone https://github.com/hamdani2020/ML-DL.git
+git clone https://github.com/hamdani2020/ML-DL.git
 cd ML-DL
 ```
 
 ### Step 2: Create a Virtual Environment
-To avoid conflicts with global packages, it's best to create a virtual environment:
+To avoid conflicts with global packages, it's recommended to create a virtual environment:
 ```bash
 python -m venv venv
 ```
@@ -39,14 +41,16 @@ python -m venv venv
 ### Step 4: Create a `requirements.txt` File
 Ensure the `requirements.txt` file contains the necessary dependencies:
 ```
-streamlit
 opencv-python
 numpy
 ultralytics
 pillow
 piexif
 folium
+streamlit
 streamlit-folium
+streamlit-webrtc
+av
 ```
 
 ### Step 5: Install the Dependencies
@@ -70,31 +74,38 @@ streamlit run app.py
 ```
 
 ### Step 2: Interact with the App
-Open your web browser and go to `http://localhost:8501` to use the app. You can:
-- **Upload Images**: Upload `.png`, `.jpg`, `.jpeg`, or `.webp` images for balloon detection.
-- **Set Confidence Threshold**: Adjust the confidence threshold for detection to control the sensitivity of the balloon detection model.
+Open your web browser and navigate to `http://localhost:8501` to use the app. You can:
+- **Real-Time Detection**: Use your webcam or other video sources for real-time balloon detection.
+- **Video Detection**: Upload `.mp4` or other supported video formats for balloon detection.
+- **Image Detection**: Upload `.png`, `.jpg`, `.jpeg`, or `.webp` images for balloon detection.
+- **Set Confidence Threshold**: Adjust the confidence threshold to control the sensitivity of the balloon detection model.
 
 ### Step 3: View Results
-- **Balloon Detection**: The app will display the original image and the image with detected balloons highlighted.
-- **Download Processed Images**: You can download the image with the detection results.
-- **Map Display**: If GPS metadata is available in the image, the app will show the location of the balloons on an interactive map.
+- **Balloon Detection**: The app will display original images or video frames, and show where balloons have been detected.
+- **Download Processed Files**: You can download processed images or video frames with detection results.
+- **Map Display**: If GPS metadata is available in an image, the app will show the balloon's location on an interactive map.
 
 ## Project Structure
 ```
 balloon-detection-app/
 │
-├── images/                 # Directory for storing images  
-├── models/                 # Directory for storing YOLO model weights
-├── pages/                  # Directory for storing pages for streamlit
-├── sample_utils/           # Directory for download utils
-├── app.py                  # Main application file
-├── requirements.txt        # File containing Python dependencies
-└── README.md               # Project documentation
+├── images/                       # Directory for storing images  
+├── models/                       # Directory for storing YOLO model weights
+├── models/balloon.pt             # Balloon model weights
+├── pages/                        # Directory for storing pages for streamlit
+├── pages/about.py                # About page
+├── pages/image_detection.py      # Image detection page
+├── pages/video_detection.py      # Video detection page
+├── pages/real_time_detection.py  # Real-time detection page
+├── sample_utils/                 # Directory for download utils
+├── app.py                        # Main application file
+├── requirements.txt              # File containing Python dependencies
+└── README.md                     # Project documentation
 ```
 
 ## Future Features (Planned)
-- **Video Stream Detection**: Extend the app to handle live video streams for balloon detection.
-- **Real-time Detection**: Implement real-time detection for video streams.
+- **Improved Video Processing**: Enhance performance for processing longer video streams.
+- **Custom Object Detection**: Allow users to upload their own trained models for detecting custom objects beyond balloons.
 
 ## Contributing
 Contributions are welcome! Please fork the repository and create a pull request if you have suggestions, improvements, or bug fixes. For major changes, please open an issue first to discuss the changes.

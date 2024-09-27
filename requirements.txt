@@ -1,8 +1,10 @@
-streamlit
 opencv-python
 numpy
 ultralytics
 pillow
 piexif
 folium
+streamlit
 streamlit-folium
+streamlit-webrtc
+av
